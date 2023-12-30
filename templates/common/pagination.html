@@ -1,0 +1,15 @@
+<div class="pagination">
+    {% if Pagination['active'] > 1 %}
+        <li><a class="" href="{{Pagination['url']}}/page-1">1</a></li>
+    {% endif %}
+    {% if Pagination['active'] > 1 %}
+        <li><a class="" href="{{Pagination['url']}}/page-{{Pagination['len']-1}}">{{Pagination['len'] - 1}}</a></li>
+    {% endif %}
+    <ul id="pagination">
+        {% for i in  1..(Pagination['len'] - 1) %}
+            {% if i >= Pagination['active'] %}
+                <li><a class="{% if i == Pagination['active'] %}active{% endif %}" href="{{Pagination['url']}}/page-{{i}}">{{i}}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div> 

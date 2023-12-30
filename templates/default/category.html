@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block desciption %}
+{{Category.description}}
+{% endblock %}
+
+{% block title %}
+{{Category.title}}
+{% endblock %}
+
+
+{% block header %} 
+   {{parent()}}
+{% endblock %}
+
+{% block content %} 
+    <div class="conteiner">
+      <div class="block-articles"> 
+        <div class="main-block">
+            {% for item in popularCategory %}
+            <div>
+                <h3>{{item.title}}</h3>
+                <img src="/img/blog/small/{{item.avatar}}" width="250">
+                <p>{{item.description}}</p>
+                <a href="{{item.url}}">Read More ...</a>
+                <span></span>
+            </div>
+            {% endfor%}
+        </div>
+        <div class="aside">
+       
+       </div>
+      </div>
+    </div>
+{% endblock %}

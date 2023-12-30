@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block description %}
+{{ Article.description }}
+{% endblock %}
+
+{% block title %}
+{{ Article.title }}
+{% endblock %}
+
+{% block header %} 
+   {{parent()}}
+{% endblock %}
+
+{% block bg %}
+white
+{% endblock %}
+{% block content %}
+      <div class="article_block">
+        <h1>{{Article.title}}</h1>
+
+        {{ Article.content|raw }}      
+
+   </div>
+{% endblock %}

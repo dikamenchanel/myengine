@@ -1,0 +1,91 @@
+{% if Form.error %}
+<div class="error-status">
+    <p> * {{ Form.error }}</p>
+</div>
+{% endif %}
+
+<form id="form_action" action="{{Form.action}}" method="post" enctype="multipart/form-data"> 
+
+<input type="hidden" name="csrf" value="{{_token}}">
+
+{% for obj in Form.form %}
+    
+    {# Button submit Form #}
+    {% if obj.tag == 'button' %}
+        <button type="submit" class="{{obj.class}}" id="{{obj.id}}"><i class="fa-solid fa-download fa-2xl"></i>&nbsp;&nbsp;{{obj.value}}</button>
+        {% if deleteUrl %}
+        <a href="{{deleteUrl}}"><i class="fa-solid fa-xmark fa-2xl"></i>&nbsp;&nbsp;Удалить</a>
+        {% endif %}
+    {% endif %}
+
+
+
+    {# SELECT #}
+    {% if obj.tag == 'select' %}
+            <div class="wrapper">
+                <label for="{{obj.id}}">{{obj.label}}</label>
+                
+                <select name="{{obj.name}}" id="{{obj.id}}" class="{% if obj.error %}error_wrapper{% endif %}">
+                    {% for key, item in obj.option %}
+                       {{key}}
+                       {% if obj.selected  == item.0 %}
+                        <option selected value="{{item.0}}">{{item.1}}</option>
+                        {% else %}
+                        <option value="{{item.0}}">{{item.1}}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                {% if obj.error %}
+                    <span class="error">*&nbsp;{{ obj.errorMsg }}</span>
+                {% endif %}
+            </div>
+    {% endif %}
+
+
+
+    {# Anytype Input #}
+    {% if obj.tag == 'input'%}
+            <div class="wrapper">
+                <label for="{{obj.id}}">{{obj.label}}</label>
+                <input type="{{obj.type}}" name="{{obj.name}}" id="{{obj.id}}" class="{{obj.class}} {% if obj.error %}error_wrapper{% endif %}" value="{{obj.value}}"  {% if obj.type == 'checkbox' and obj.value %}checked{% endif %}>
+                {% if obj.error %}
+                    <span class="error">*&nbsp;{{ obj.errorMsg }}</span>
+                {% endif %}
+                {% if obj.name == 'is_postponed' and obj.value %}
+                <script>
+                    var dataPostponed = {{ dataPostponed|raw|json_encode|raw }};
+                </script>                
+                {% endif %}
+                {% if obj.type == 'file' %}
+                    <span class="output"><img id="image-preview" src="{% if obj.value %}/img/blog/small/{{obj.value}}{%else%}#{% endif %}" alt="Image Preview" width="220"></span>
+                {% endif %}
+            </div>
+    {% endif %}
+
+
+    {# Default Textarea #}
+    {% if obj.tag == 'textarea' %}
+            <div class="wrapper">
+                <label for="{{obj.id}}">{{obj.label}}</label>
+                <textarea name="{{obj.name}}" id="{{obj.id}}" cols="{{obj.cols}}" rows="{{obj.rows}}" class="{% if obj.error %}error_wrapper{% endif %}">{{obj.value}}</textarea>
+                {% if obj.error %}
+                    <span class="error">*&nbsp;{{ obj.errorMsg }}</span>
+                {% endif %}
+            </div>
+    {% endif %}
+
+
+    {# Editor TinyMCE #}
+    {% if obj.tag == 'tinymce' %}
+            <div class="wrapper textarea">
+                <label for="{{obj.id}}">{{obj.label}}</label>
+                <textarea name="{{obj.name}}" id="{{obj.id}}" class="{% if obj.error %}error_wrapper{% endif %}">{{obj.value}}</textarea>
+                {% if obj.error %}
+                    <span class="error">*&nbsp;{{ obj.errorMsg }}</span>
+                {% endif %}
+            </div>
+    {% endif %}
+
+{% endfor %}
+
+</form> 

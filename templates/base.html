@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="/img/favicon.webp">
+    <link defer rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+    {% block header %}
+        <div class="logo"><img src="/img/logo_new.webp"  ></div>
+        {% include 'common/nav.html' %}
+    {% endblock %}
+    </header>
+    <main class="{% block bg %}color-bg{% endblock %}">
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+    {% block footer %}
+         {% include 'common/footer.html' %}
+    {% endblock %}
+    </footer>
+
+<script src="/js/main.js" ></script>
+
+</body>
+</html> 

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block description %}
+{{ Page.description }}
+{% endblock %}
+
+{% block title %}
+{{ Page.title }}
+{% endblock %}
+
+{% block header %} 
+   {{parent()}}
+{% endblock %}
+
+{% block content %}
+   <div class="conteiner">
+
+        {{ Page.content|raw }}      
+
+   </div>
+{% endblock %}
