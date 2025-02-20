@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+
+    <link rel="icon" href="/img/favicon.webp">
+    <link rel="stylesheet" href="/css/admin.css">
+
+    <link rel="reload" as="style" type="text/css" href="/css/font-awesome-6.4.2.css" crossorigin >
+    <link rel="stylesheet" href="/css/font-awesome-6.4.2.css" >
+    <script src="/js/tinymce/tinymce.min.js"></script>
+    
+</head>
+<body>
+    {% block header %} 
+    <header>
+        <center><h1>{{title}}</h1></center>
+        <form action="/logout" method="post"> 
+            <i class="fa-solid fa-user-tie fa-lg">&nbsp;&nbsp;&nbsp;{{user.user_name}}&nbsp;&nbsp;&nbsp;</i>
+            <input type="hidden" name="csrf" value="{{_token}}">
+            <button type="submit" ><i class="fa-solid fa-right-from-bracket"></i></button>
+        </form>
+    </header>
+    {% endblock %}
+
+    <content>
+    {% block content %} 
+    {% include 'admin/admin_menu.html' %} 
+    {% endblock %}
+    </content>
+
+    {% block footer %} 
+    <footer>&copy;Dikamen 2023. All rights reseved.</footer>
+    {% endblock %}
+    <script  src="/js/tmce.js"></script>
+    <script  src="/js/admin.js"></script>
+</body>
+</html> 

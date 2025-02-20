@@ -1,0 +1,61 @@
+{% if Access %}
+<div class="access">
+    <p>{{Access}}</p>
+</div>
+{% endif %}
+
+
+<div class="table">
+    <ul class="table-title">
+    {% for title in Table.titles %}
+        {% if title == 'actions' %}
+            <li style="min-width:150px;width:150px;justify-content:space-around;{{Table.style[loop.index0]}}">
+                {{title}}
+            </li>
+        {% elseif title == 'link' %}
+            <li style="min-width:50px;width:50px;justify-content:center;{{Table.style[loop.index0]}}">
+                {{title}}
+            </li>
+        {% elseif title == 'avatar' %}
+            <li style="justify-content:center;{{Table.style[loop.index0]}}">
+                {{title}}
+            </li>
+        {% else %}
+            <li style="{{Table.style[loop.index0]}}">{{title}}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+    <ul class="table-body">
+        {% for items in Table.data %}
+            {% if loop.index % 2 == 0 %}
+                <li class="body-row bg">
+            {% else %}
+                <li class="body-row">
+            {% endif %}
+                <ol>
+                {% for key, item in items %}
+                    {% if key == 'urlAction' %}
+                        <li class="row-item" style="min-width:150px;width:150px;justify-content:space-around;{{Table.style[loop.index0]}}">
+                            <a href="{{item.0}}"><i class="fa-solid fa-pencil fa-xl"></i></a>
+                            <a href="{{item.1}}"><i class="fa-solid fa-xmark fa-xl"></i></a>
+                            {% if item.input %}
+                                <input {% if item.input.checked %}checked{% endif %} type="checkbox" name="{{item.input.name}}" class="{{item.input.name}}" id="{{item.input.name}}_{{loop.index0}}">
+                            {% endif %}
+                        </li>
+                    {% elseif key == 'urlLink' %}
+                        <li class="row-item" style="min-width:50px;width:50px;justify-content:center;{{Table.style[loop.index0]}}">
+                            <a href="{{item.href}}" target="_blank"><i class="fa-solid fa-square-up-right fa-xl"></i>{{item.innerHTML}}</a>
+                        </li>
+                    {% elseif key == 'urlAvatar' %}
+                        <li class="row-item" style="justify-content:center;{{Table.style[loop.index0]}}">
+                            <img src="{{item.src}}" style="{{item.style}}">
+                        </li>
+                    {% else %}
+                        <li class="row-item" style="{{Table.style[loop.index0]}}">{{item}}</li>
+                    {% endif %}
+                {% endfor %}
+                </ol>
+            </li>
+        {% endfor %}
+    </ul>
+</div>

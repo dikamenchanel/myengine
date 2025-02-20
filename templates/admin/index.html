@@ -1,0 +1,36 @@
+{% extends 'admin/admin.html' %} 
+
+
+
+
+{% block content %} 
+{{parent()}}
+<div class="conteiner">
+
+{% if addUrl %}
+    <a style="margin:30px;position:fixed;z-index:10000;text-decoration:none;background:#fff;" href="{{addUrl}}"><i class="{{addIcon}}"></i>&nbsp;&nbsp;Добавить</a>
+{% endif %}
+{% if backUrl %}
+    <a style="margin:30px;position:fixed;z-index:10000;text-decoration:none;background:#fff;" href="{{backUrl}}"><i class="fa-solid fa-arrow-left fa-2xl"></i>&nbsp;&nbsp;Назад</a>
+{% endif %}
+
+{% if Table %}
+    {% include 'admin/Table.html' %}
+{% endif %}
+
+{% if Form %}
+    {% include 'admin/Form.html' %}
+{% endif %}
+
+{% if deleteData %}
+    {% include 'admin/delete.html' %}
+{% endif %}
+
+{% if Pagination %}
+    {% include 'common/pagination.html' %}
+{% endif %}
+</div>
+{% endblock %}
+
+
+

@@ -1,0 +1,7 @@
+<nav>
+    <ul>
+        {% for item in categories %}
+            <li><a href="/{{item.url}}">{{item.title}}</a><span></span></li>
+        {% endfor %}
+    </ul>
+</nav> 

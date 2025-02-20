@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block description %}
+{{ mainPage.description }}
+{% endblock %}
+
+{% block title %}
+{{ mainPage.title }}
+{% endblock %}
+
+
+{% block header %} 
+   {{parent()}}
+{% endblock %}
+
+{% block content %}
+   <div class="conteiner">
+      
+      <div class="trending-day">
+            
+            <div class="main-banner">
+                {% for item in TrandingDay %}
+                <a href="{{item.url}}" 
+                class="{% if loop.index0 == 0 %}active{% endif %}"
+                style="background-image:linear-gradient(120deg, rgba(241, 250, 255, 0.1), rgb(255, 255, 255)), url('/img/blog/{{item.avatar}}')">
+                    <h2>{{item.title}}</h2>
+                    <p>{{item.description}}</p>
+                </a>
+                {% endfor %}
+            </div>
+            <div class="preview">
+                {% for preview  in TrandingDay %}
+                <img src="/img/blog/small/{{preview.avatar}}" class="{% if loop.index0 == 0 %}active-preview{% endif %}" width="75" alt="{{preview.avatar}}" >
+                {% endfor %}
+            </div>
+      </div>
+
+<hr>
+      <div class="block-articles"> 
+        <div class="main-block">
+            {% for item in articles %}
+            <div>
+                <h3>{{item.title}}</h3>
+                <img src="/img/blog/small/{{item.avatar}}" width="250">
+                <p>{{item.description}}</p>
+                <a href="{{item.url}}">Read More ...</a>
+                <span></span>
+                <div class="category">
+                    <a href="{{item.category_url}}">{{item.category_title}}</a>
+                    <div>
+                        <b>&nbsp;&#9787;&nbsp;{{item.views}}</b>
+                        <b>&nbsp;&#10084;&nbsp;{{item.liked}}</b>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor%}
+        </div>
+        <div class="aside">
+       
+       </div>
+      </div>
+   </div>
+{% endblock %}

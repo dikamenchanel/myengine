@@ -1,0 +1,14 @@
+{% if ErrorDelete %}
+<div class="error-status">
+    <p> * {{ ErrorDelete }}</p>
+</div>
+{% endif %}
+
+<form id="form_delete" action="{{deleteUrl}}" method="post"> 
+
+<input type="hidden" name="csrf" value="{{_token}}">
+<input type="hidden" name="{{deleteData.keys.0}}" value="{{deleteData.values.0}}">
+<p class="question">Вы действительно хотите удалить этот элемент `{{ deleteData.values.1 }}`? Вы серьезно подумали?</p>
+<button type="submit"><i class="fa-solid fa-thumbs-down fa-xl"></i>&nbsp;&nbsp;&nbsp;Подтвердить</button>
+<a href="{{editUrl}}"><i class="fa-solid fa-newspaper fa-xl"></i>&nbsp;&nbsp;&nbsp;Посмотреть на статтью</button>
+</form> 
